@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/lib/auth";
-
+export const runtime = 'edge';
 export default async function DashboardPage() {
   const user = await getCurrentUser();
 

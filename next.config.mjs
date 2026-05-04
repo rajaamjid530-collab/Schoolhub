@@ -1,17 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // یہ لائن فائلز کو چھوٹے ٹکڑوں میں تقسیم کرے گی تاکہ 25MB سے زیادہ نہ ہوں
+  // 1. آؤٹ پٹ ڈائریکٹری سیٹ کریں
+  distDir: '.next',
+
+  // 2. بڑی فائلوں کو چھوٹے حصوں میں توڑنے کا بہتر طریقہ
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
-        maxSize: 20000000, // 20MB کی لیمیٹ سیٹ کر دی
+        minSize: 10000, // 10KB سے بڑی ہر چیز کو الگ کرو
+        maxSize: 15000000, // کسی بھی فائل کو 15MB سے بڑا نہ ہونے دو
       };
     }
     return config;
   },
-  // اگر آؤٹ پٹ ڈائریکٹری کا مسئلہ ہو تو یہ بھی کام آتا ہے
-  distDir: '.next',
+
+  // 3. سورس میپس (Source Maps) بند کریں تاکہ سائز کم رہے
+  productionBrowserSourceMaps: false,
 };
 
 export default nextConfig;

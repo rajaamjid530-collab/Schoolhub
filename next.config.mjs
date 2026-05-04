@@ -1,22 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. آؤٹ پٹ ڈائریکٹری سیٹ کریں
-  distDir: '.next',
-
-  // 2. بڑی فائلوں کو چھوٹے حصوں میں توڑنے کا بہتر طریقہ
+  // کلاؤڈ فلیر کی 25MB لیمیٹ کو حل کرنے کے لیے کوڈ سپلٹنگ (Code Splitting)
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
-        minSize: 10000, // 10KB سے بڑی ہر چیز کو الگ کرو
-        maxSize: 15000000, // کسی بھی فائل کو 15MB سے بڑا نہ ہونے دو
+        minSize: 10000,
+        maxSize: 20000000, // کسی بھی فائل کو 20MB سے بڑا نہیں ہونے دے گا
       };
     }
     return config;
   },
-
-  // 3. سورس میپس (Source Maps) بند کریں تاکہ سائز کم رہے
-  productionBrowserSourceMaps: false,
+  // آؤٹ پٹ کو درست جگہ رکھنے کے لیے
+  distDir: '.next',
 };
 
 export default nextConfig;

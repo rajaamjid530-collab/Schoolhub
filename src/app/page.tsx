@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin, Users, BookOpen, Award, Share2, Download, Smartphone } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
@@ -10,50 +9,44 @@ export default function HomePage() {
 
   const features = [
     {
-      icon: Users,
+      emoji: "👥",
       title: "سٹوڈنٹ مینجمنٹ",
-      desc: "سٹوڈنٹس کی رجسٹریشن، حاضری اور ریکارڈ",
-      color: "from-blue-500 to-cyan-500"
+      desc: "سٹوڈنٹس کی رجسٹریشن، حاضری اور ریکارڈ"
     },
     {
-      icon: Award,
+      emoji: "🏆",
       title: "ریزلٹ کارڈ",
-      desc: "پروفیشنل ریزلٹ کارڈ بنائیں اور شیئر کریں",
-      color: "from-purple-500 to-pink-500"
+      desc: "پروفیشنل ریزلٹ کارڈ بنائیں اور شیئر کریں"
     },
     {
-      icon: BookOpen,
+      emoji: "📚",
       title: "نمبر ٹریکنگ",
-      desc: "ہر سٹوڈنٹ کے نمبر اور فیصد کا ریکارڈ",
-      color: "from-green-500 to-emerald-500"
+      desc: "ہر سٹوڈنٹ کے نمبر اور فیصد کا ریکارڈ"
     },
     {
-      icon: Share2,
+      emoji: "📤",
       title: "فوری شیئرنگ",
-      desc: "پی ڈی ایف میں سیو کر کے سب جگہ شیئر کریں",
-      color: "from-orange-500 to-red-500"
+      desc: "پی ڈی ایف میں سیو کر کے سب جگہ شیئر کریں"
     },
     {
-      icon: Smartphone,
+      emoji: "📱",
       title: "موبائل فرینڈلی",
-      desc: "کسی بھی ڈیوائس سے استعمال کریں",
-      color: "from-indigo-500 to-blue-500"
+      desc: "کسی بھی ڈیوائس سے استعمال کریں"
     },
     {
-      icon: Download,
+      emoji: "📄",
       title: "لیٹر ہیڈ",
-      desc: "سکول کا اپنا لیٹر ہیڈ ڈیزائن بنائیں",
-      color: "from-rose-500 to-pink-500"
+      desc: "سکول کا اپنا لیٹر ہیڈ ڈیزائن بنائیں"
     }
   ];
 
   const schools = [
-    { name: "سیٹ اپ 1", location: "کشمیر", image: "🏫" },
-    { name: "سیٹ اپ 2", location: "سرینگر", image: "🏛️" },
-    { name: "سیٹ اپ 3", location: "گلمرگ", image: "🏰" },
-    { name: "سیٹ اپ 4", location: "پہلگام", image: "🏘️" },
-    { name: "سیٹ اپ 5", location: "آنند وٹن", image: "🏛️" },
-    { name: "سیٹ اپ 6", location: "لیہ", image: "🏫" },
+    { name: "سیٹ اپ 1", location: "کشمیر", emoji: "🏫" },
+    { name: "سیٹ اپ 2", location: "سرینگر", emoji: "🏛️" },
+    { name: "سیٹ اپ 3", location: "گلمرگ", emoji: "🏰" },
+    { name: "سیٹ اپ 4", location: "پہلگام", emoji: "🏘️" },
+    { name: "سیٹ اپ 5", location: "آنند وٹن", emoji: "🏛️" },
+    { name: "سیٹ اپ 6", location: "لیہ", emoji: "🏫" },
   ];
 
   return (
@@ -94,7 +87,7 @@ export default function HomePage() {
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
             اپنے سکول کی تمام ضروری چیزیں ایک جگہ منیج کریں۔ سٹوڈنٹس، ریزلٹ، حاضری - سب کچھ آسانی سے!
           </p>
-          <div className="flex gap-4 justify-center mb-12">
+          <div className="flex gap-4 justify-center mb-12 flex-wrap">
             <button
               onClick={() => router.push("/login?signup=school")}
               className="px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 transition font-semibold text-lg"
@@ -118,24 +111,20 @@ export default function HomePage() {
             آپ کو ملے گی یہ <span className="text-cyan-400">سہولیات</span>
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
-            {features.map((feature, idx) => {
-              const Icon = feature.icon;
-              return (
-                <div
-                  key={idx}
-                  onMouseEnter={() => setHoveredCard(idx)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  className="group relative p-6 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105"
-                >
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                  <div className="relative z-10">
-                    <Icon className={`w-12 h-12 mb-4 text-cyan-400`} />
-                    <h4 className="text-xl font-bold mb-2">{feature.title}</h4>
-                    <p className="text-slate-400">{feature.desc}</p>
-                  </div>
+            {features.map((feature, idx) => (
+              <div
+                key={idx}
+                onMouseEnter={() => setHoveredCard(idx)}
+                onMouseLeave={() => setHoveredCard(null)}
+                className="group relative p-6 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105"
+              >
+                <div className="relative z-10">
+                  <div className="text-5xl mb-4">{feature.emoji}</div>
+                  <h4 className="text-xl font-bold mb-2">{feature.title}</h4>
+                  <p className="text-slate-400">{feature.desc}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -155,10 +144,10 @@ export default function HomePage() {
                 key={idx}
                 className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 p-8 text-center hover:shadow-2xl"
               >
-                <div className="text-6xl mb-4">{school.image}</div>
+                <div className="text-6xl mb-4">{school.emoji}</div>
                 <h4 className="text-xl font-bold mb-2">{school.name}</h4>
                 <div className="flex items-center justify-center gap-2 text-slate-400">
-                  <MapPin className="w-4 h-4" />
+                  <span>📍</span>
                   <span>{school.location}</span>
                 </div>
               </div>
@@ -171,7 +160,7 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-gradient-to-b from-slate-800/50 to-transparent">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-4xl font-bold text-center mb-12">
-            سکول رجسٹریشن کے <span className="text-cyan-400">فوائد</span>
+            سکول رجسٹریشن کے <span className="text-cyan-400">فوائل</span>
           </h3>
           <div className="space-y-6">
             <div className="p-6 rounded-xl bg-slate-800/50 border border-slate-700 hover:border-cyan-500/30 transition">
